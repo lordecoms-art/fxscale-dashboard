@@ -1106,9 +1106,16 @@
         document.head.appendChild(style);
 
         function launchAgent(projectId) {
+            const urls = {
+                'closer-crm': 'http://46.224.228.65:8080/?folder=/root/projects/closer-crm',
+                'trading-intelligence': 'http://46.224.228.65:8080/?folder=/root/projects/trading-intelligence',
+                'telegram-monitoring': 'http://46.224.228.65:8080/?folder=/root/projects/telegram-monitor',
+                'lp-createur': 'http://46.224.228.65:8080/?folder=/root/projects/lp-createur',
+                'analyseur-creatives': 'http://46.224.228.65:8080/?folder=/root/projects/analyseur-creatives'
+            };
             const names = {'closer-crm':'Closer CRM','trading-intelligence':'Trading Intelligence','telegram-monitoring':'Telegram Monitoring','lp-createur':'LP Createur','analyseur-creatives':'Analyseur de Creatives'};
-            const prompt = 'Tu es un agent IA specialise sur le projet "'+names[projectId]+'". Tu as acces au contexte complet du projet et tu peux coder, debugger et proposer des ameliorations. Projet actuel: '+names[projectId]+'\n\nComment puis-je t\'aider aujourd\'hui ?';
-            navigator.clipboard.writeText(prompt).then(() => showNotification('🤖 Prompt copie pour '+names[projectId]+'!'));
+            window.open(urls[projectId], '_blank');
+            showNotification('🤖 VS Code ouvert pour '+names[projectId]+'!');
         }
 
         function openAgentSelector() { showNotification('🚀 Selectionne un projet pour lancer son agent!'); }
