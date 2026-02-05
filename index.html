@@ -887,12 +887,12 @@
             <div class="stats-bar">
                 <div class="stat-card" style="--stat-color: var(--accent-cyan);">
                     <div class="stat-icon">🚀</div>
-                    <div class="stat-value">5</div>
+                    <div class="stat-value">6</div>
                     <div class="stat-label">Projets Actifs</div>
                 </div>
                 <div class="stat-card" style="--stat-color: var(--accent-green);">
                     <div class="stat-icon">✅</div>
-                    <div class="stat-value">3</div>
+                    <div class="stat-value">4</div>
                     <div class="stat-label">En Production</div>
                 </div>
                 <div class="stat-card" style="--stat-color: var(--accent-orange);">
@@ -1001,6 +1001,24 @@
                         <button class="project-btn project-btn-secondary" onclick="launchAgent('analyseur-creatives')">🤖 Agent IA</button>
                     </div>
                 </div>
+
+                <div class="project-card" data-color="cyan">
+                    <div class="project-header">
+                        <div class="project-icon">🎨</div>
+                        <div class="project-status"><div class="project-status-dot"></div><span>EN LIGNE</span></div>
+                    </div>
+                    <h3 class="project-name">GÉNÉRATEUR CRÉAS STH</h3>
+                    <p class="project-desc">Génération de créatives publicitaires Meta Ads. Analyse et création automatique de visuels.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">AI GENERATION</span>
+                        <span class="project-tag">CREATIVES</span>
+                        <span class="project-tag">META ADS</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://frontend-production-62d5.up.railway.app" target="_blank" class="project-btn project-btn-primary">🔗 Ouvrir</a>
+                        <button class="project-btn project-btn-secondary" onclick="launchAgent('generateur-creas-sth')">🤖 Agent IA</button>
+                    </div>
+                </div>
             </div>
 
             <div class="agent-section">
@@ -1107,15 +1125,16 @@
 
         function launchAgent(projectId) {
             const urls = {
-                'closer-crm': 'http://46.224.228.65:8080/?folder=/root/projects/closer-crm',
-                'trading-intelligence': 'http://46.224.228.65:8080/?folder=/root/projects/trading-intelligence',
-                'telegram-monitoring': 'http://46.224.228.65:8080/?folder=/root/projects/telegram-monitor',
-                'lp-createur': 'http://46.224.228.65:8080/?folder=/root/projects/lp-createur',
-                'analyseur-creatives': 'http://46.224.228.65:8080/?folder=/root/projects/analyseur-creatives'
+                'closer-crm': 'vscode://vscode-remote/ssh-remote+root@46.224.228.65/root/projects/closer-crm',
+                'trading-intelligence': 'vscode://vscode-remote/ssh-remote+root@46.224.228.65/root/projects/trading-intelligence',
+                'telegram-monitoring': 'vscode://vscode-remote/ssh-remote+root@46.224.228.65/root/projects/telegram-monitor',
+                'lp-createur': 'vscode://vscode-remote/ssh-remote+root@46.224.228.65/root/projects/lp-createur',
+                'analyseur-creatives': 'vscode://vscode-remote/ssh-remote+root@46.224.228.65/root/projects/analyseur-creatives',
+                'generateur-creas-sth': 'vscode://vscode-remote/ssh-remote+root@46.224.228.65/root/projects/generateur-creas-sth'
             };
-            const names = {'closer-crm':'Closer CRM','trading-intelligence':'Trading Intelligence','telegram-monitoring':'Telegram Monitoring','lp-createur':'LP Createur','analyseur-creatives':'Analyseur de Creatives'};
-            window.open(urls[projectId], '_blank');
-            showNotification('🤖 VS Code ouvert pour '+names[projectId]+'!');
+            const names = {'closer-crm':'Closer CRM','trading-intelligence':'Trading Intelligence','telegram-monitoring':'Telegram Monitoring','lp-createur':'LP Createur','analyseur-creatives':'Analyseur de Creatives','generateur-creas-sth':'Générateur Créas STH'};
+            window.location.href = urls[projectId];
+            showNotification('🤖 Ouverture de VS Code pour '+names[projectId]+'!');
         }
 
         function openAgentSelector() { showNotification('🚀 Selectionne un projet pour lancer son agent!'); }
