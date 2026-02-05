@@ -1132,9 +1132,28 @@
                 'analyseur-creatives': 'vscode://vscode-remote/ssh-remote+root@46.224.228.65/root/projects/analyseur-creatives',
                 'generateur-creas-sth': 'vscode://vscode-remote/ssh-remote+root@46.224.228.65/root/projects/generateur-creas-sth'
             };
-            const names = {'closer-crm':'Closer CRM','trading-intelligence':'Trading Intelligence','telegram-monitoring':'Telegram Monitoring','lp-createur':'LP Createur','analyseur-creatives':'Analyseur de Creatives','generateur-creas-sth':'Générateur Créas STH'};
-            window.location.href = urls[projectId];
-            showNotification('🤖 Ouverture de VS Code pour '+names[projectId]+'!');
+            const names = {
+                'closer-crm': 'Closer CRM',
+                'trading-intelligence': 'Trading Intelligence',
+                'telegram-monitoring': 'Telegram Monitoring',
+                'lp-createur': 'LP Createur',
+                'analyseur-creatives': 'Analyseur de Creatives',
+                'generateur-creas-sth': 'Générateur Créas STH'
+            };
+            const url = urls[projectId];
+            const name = names[projectId];
+            console.log('🚀 Agent IA - Project:', projectId, '- URL:', url);
+            if (!url) {
+                showNotification('❌ Projet non trouvé: ' + projectId);
+                return;
+            }
+            // Crée un lien temporaire pour ouvrir dans une nouvelle fenêtre VS Code
+            const link = document.createElement('a');
+            link.href = url;
+            link.target = '_blank';
+            link.rel = 'noopener';
+            link.click();
+            showNotification('🤖 Ouverture de VS Code pour ' + name + '!');
         }
 
         function openAgentSelector() { showNotification('🚀 Selectionne un projet pour lancer son agent!'); }
