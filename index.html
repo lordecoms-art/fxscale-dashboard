@@ -963,10 +963,14 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            z-index: 2;
+            white-space: nowrap;
+        }
+
+        .project-header-badges {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
         }
 
         .project-ai-badge .ai-badge-dot {
@@ -1795,16 +1799,31 @@
                     const projectId = card.dataset.project;
                     const info = data.health[projectId];
                     const isActive = info && info.active;
+                    const header = card.querySelector('.project-header');
 
-                    // Remove existing badge if any
-                    const existing = card.querySelector('.project-ai-badge');
+                    // Ensure wrapper exists
+                    let wrapper = header.querySelector('.project-header-badges');
+                    if (!wrapper) {
+                        wrapper = document.createElement('div');
+                        wrapper.className = 'project-header-badges';
+                        // Move existing status badge into wrapper
+                        const status = header.querySelector('.project-status');
+                        if (status) {
+                            header.removeChild(status);
+                            wrapper.appendChild(status);
+                        }
+                        header.appendChild(wrapper);
+                    }
+
+                    // Remove old AI badge
+                    const existing = wrapper.querySelector('.project-ai-badge');
                     if (existing) existing.remove();
 
-                    // Create badge
+                    // Create new AI badge (insert before status)
                     const badge = document.createElement('div');
                     badge.className = `project-ai-badge ${isActive ? 'ai-active' : 'ai-inactive'}`;
                     badge.innerHTML = `<span class="ai-badge-dot"></span>${isActive ? 'AGENT ACTIF' : 'AGENT OFF'}`;
-                    card.appendChild(badge);
+                    wrapper.insertBefore(badge, wrapper.firstChild);
                 });
             }
 
