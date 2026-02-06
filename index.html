@@ -530,6 +530,40 @@
             margin-bottom: 30px;
         }
 
+        .open-all-btn {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            border: none;
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--bg-primary);
+            cursor: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .open-all-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .open-all-btn:hover::before { left: 100%; }
+        .open-all-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+        }
+
         .section-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.5rem;
@@ -565,11 +599,13 @@
             animation: fadeInUp 0.6s ease-out backwards;
         }
 
-        .project-card:nth-child(1) { animation-delay: 0.2s; }
-        .project-card:nth-child(2) { animation-delay: 0.3s; }
-        .project-card:nth-child(3) { animation-delay: 0.4s; }
-        .project-card:nth-child(4) { animation-delay: 0.5s; }
-        .project-card:nth-child(5) { animation-delay: 0.6s; }
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
+        .project-card:nth-child(6) { animation-delay: 0.6s; }
+        .project-card:nth-child(7) { animation-delay: 0.7s; }
 
         .project-card::before {
             content: '';
@@ -603,6 +639,22 @@
         .project-card[data-color="green"] { --card-color: var(--accent-green); --card-glow: rgba(0, 255, 136, 0.2); }
         .project-card[data-color="orange"] { --card-color: var(--accent-orange); --card-glow: rgba(255, 107, 53, 0.2); }
         .project-card[data-color="pink"] { --card-color: var(--accent-pink); --card-glow: rgba(255, 0, 128, 0.2); }
+        .project-card[data-color="gold"] { --card-color: var(--accent-gold); --card-glow: rgba(255, 215, 0, 0.2); }
+
+        .project-badge {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+            color: var(--bg-primary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-left: 10px;
+            display: inline-block;
+            vertical-align: middle;
+        }
 
         .project-header {
             display: flex;
@@ -887,12 +939,12 @@
             <div class="stats-bar">
                 <div class="stat-card" style="--stat-color: var(--accent-cyan);">
                     <div class="stat-icon">🚀</div>
-                    <div class="stat-value">6</div>
+                    <div class="stat-value">7</div>
                     <div class="stat-label">Projets Actifs</div>
                 </div>
                 <div class="stat-card" style="--stat-color: var(--accent-green);">
                     <div class="stat-icon">✅</div>
-                    <div class="stat-value">4</div>
+                    <div class="stat-value">5</div>
                     <div class="stat-label">En Production</div>
                 </div>
                 <div class="stat-card" style="--stat-color: var(--accent-orange);">
@@ -909,9 +961,28 @@
 
             <div class="section-header">
                 <h2 class="section-title">Mes Projets</h2>
+                <button class="open-all-btn" onclick="launchAllAgents()">🚀 Ouvrir tous les projets</button>
             </div>
 
             <div class="projects-grid">
+                <div class="project-card" data-color="gold">
+                    <div class="project-header">
+                        <div class="project-icon">⚡</div>
+                        <div class="project-status"><div class="project-status-dot"></div><span>EN LIGNE</span></div>
+                    </div>
+                    <h3 class="project-name">FXSCALE DASHBOARD <span class="project-badge">MAIN</span></h3>
+                    <p class="project-desc">Dashboard central de commande FXSCALE IA. Interface centralisee pour gerer tous les projets et agents.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">HTML/CSS/JS</span>
+                        <span class="project-tag">NGINX</span>
+                        <span class="project-tag">RAILWAY</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://fxscale-dashboard-production.up.railway.app" target="_blank" class="project-btn project-btn-primary">🔗 Ouvrir</a>
+                        <button class="project-btn project-btn-secondary" onclick="launchAgent('fxscale-dashboard')">🤖 Agent IA</button>
+                    </div>
+                </div>
+
                 <div class="project-card" data-color="cyan">
                     <div class="project-header">
                         <div class="project-icon">📊</div>
@@ -1123,37 +1194,37 @@
         style.textContent = '@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}';
         document.head.appendChild(style);
 
+        const agentProjects = [
+            { id: 'fxscale-dashboard', name: 'FXScale Dashboard', path: '/root/projects/fxscale-dashboard' },
+            { id: 'closer-crm', name: 'Closer CRM', path: '/root/projects/closer-crm' },
+            { id: 'trading-intelligence', name: 'Trading Intelligence', path: '/root/projects/trading-intelligence' },
+            { id: 'telegram-monitoring', name: 'Telegram Monitoring', path: '/root/projects/telegram-monitor' },
+            { id: 'lp-createur', name: 'LP Createur', path: '/root/projects/lp-createur' },
+            { id: 'analyseur-creatives', name: 'Analyseur de Creatives', path: '/root/projects/analyseur-creatives' },
+            { id: 'generateur-creas-sth', name: 'Générateur Créas STH', path: '/root/projects/generateur-creas-sth' }
+        ];
+
         function launchAgent(projectId) {
-            const urls = {
-                'closer-crm': 'vscode://vscode-remote/ssh-remote+root@46.224.228.65/root/projects/closer-crm',
-                'trading-intelligence': 'vscode://vscode-remote/ssh-remote+root@46.224.228.65/root/projects/trading-intelligence',
-                'telegram-monitoring': 'vscode://vscode-remote/ssh-remote+root@46.224.228.65/root/projects/telegram-monitor',
-                'lp-createur': 'vscode://vscode-remote/ssh-remote+root@46.224.228.65/root/projects/lp-createur',
-                'analyseur-creatives': 'vscode://vscode-remote/ssh-remote+root@46.224.228.65/root/projects/analyseur-creatives',
-                'generateur-creas-sth': 'vscode://vscode-remote/ssh-remote+root@46.224.228.65/root/projects/generateur-creas-sth'
-            };
-            const names = {
-                'closer-crm': 'Closer CRM',
-                'trading-intelligence': 'Trading Intelligence',
-                'telegram-monitoring': 'Telegram Monitoring',
-                'lp-createur': 'LP Createur',
-                'analyseur-creatives': 'Analyseur de Creatives',
-                'generateur-creas-sth': 'Générateur Créas STH'
-            };
-            const url = urls[projectId];
-            const name = names[projectId];
-            console.log('🚀 Agent IA - Project:', projectId, '- URL:', url);
-            if (!url) {
+            const project = agentProjects.find(p => p.id === projectId);
+            if (!project) {
                 showNotification('❌ Projet non trouvé: ' + projectId);
                 return;
             }
-            // Crée un lien temporaire pour ouvrir dans une nouvelle fenêtre VS Code
-            const link = document.createElement('a');
-            link.href = url;
-            link.target = '_blank';
-            link.rel = 'noopener';
-            link.click();
-            showNotification('🤖 Ouverture de VS Code pour ' + name + '!');
+            // windowId=_blank force l'ouverture dans une NOUVELLE fenêtre VS Code
+            const url = 'vscode://vscode-remote/ssh-remote+root@46.224.228.65' + project.path + '?windowId=_blank';
+            console.log('🚀 Agent IA - Project:', projectId, '- URL:', url);
+            window.location.href = url;
+            showNotification('🤖 Ouverture de VS Code pour ' + project.name + '!');
+        }
+
+        function launchAllAgents() {
+            showNotification('🚀 Ouverture des 7 projets en cours...');
+            agentProjects.forEach((project, index) => {
+                setTimeout(() => {
+                    const url = 'vscode://vscode-remote/ssh-remote+root@46.224.228.65' + project.path + '?windowId=_blank';
+                    window.location.href = url;
+                }, index * 1500);
+            });
         }
 
         function openAgentSelector() { showNotification('🚀 Selectionne un projet pour lancer son agent!'); }
