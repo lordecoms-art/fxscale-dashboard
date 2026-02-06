@@ -952,6 +952,265 @@
             .projects-grid { grid-template-columns: 1fr; }
         }
 
+        /* === USAGE IA SECTION === */
+        .ia-usage-section {
+            margin-top: 50px;
+            animation: fadeInUp 0.6s ease-out backwards;
+            animation-delay: 0.8s;
+        }
+
+        .ia-usage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .ia-usage-header .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .ia-usage-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .ia-model-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(0, 240, 255, 0.1));
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            border-radius: 20px;
+            color: var(--accent-purple);
+            letter-spacing: 1px;
+        }
+
+        .ia-live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent-green);
+            letter-spacing: 1px;
+        }
+
+        .ia-live-dot {
+            width: 8px; height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--accent-green);
+            animation: statusPulse 2s infinite;
+        }
+
+        .ia-stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .ia-stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 22px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .ia-stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 2px;
+            background: var(--ia-stat-color, var(--accent-cyan));
+        }
+
+        .ia-stat-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--ia-stat-color, var(--accent-cyan));
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .ia-stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--ia-stat-color, var(--accent-cyan));
+            text-shadow: 0 0 20px var(--ia-stat-color, var(--accent-cyan));
+        }
+
+        .ia-stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 6px;
+        }
+
+        .ia-health-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 14px;
+        }
+
+        .ia-health-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 18px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ia-health-card::after {
+            content: '';
+            position: absolute;
+            left: 0; top: 0;
+            width: 3px; height: 100%;
+            background: var(--health-color, var(--text-muted));
+            transition: background 0.3s;
+        }
+
+        .ia-health-card.active {
+            border-color: rgba(0, 255, 136, 0.2);
+            --health-color: var(--accent-green);
+        }
+
+        .ia-health-card.active:hover {
+            border-color: rgba(0, 255, 136, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .ia-health-card.inactive {
+            --health-color: var(--text-muted);
+            opacity: 0.6;
+        }
+
+        .ia-health-card.inactive:hover {
+            opacity: 0.8;
+        }
+
+        .ia-health-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .ia-health-status {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .ia-health-card.active .ia-health-status {
+            background: var(--accent-green);
+            box-shadow: 0 0 12px var(--accent-green);
+            animation: statusPulse 2s infinite;
+        }
+
+        .ia-health-card.inactive .ia-health-status {
+            background: var(--text-muted);
+        }
+
+        .ia-health-name {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+        }
+
+        .ia-health-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .ia-health-uptime {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            background: rgba(0, 240, 255, 0.08);
+            padding: 4px 10px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .ia-health-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            padding: 5px 12px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .ia-health-card.active .ia-health-badge {
+            background: rgba(0, 255, 136, 0.15);
+            color: var(--accent-green);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .ia-health-card.inactive .ia-health-badge {
+            background: rgba(64, 64, 85, 0.2);
+            color: var(--text-muted);
+            border: 1px solid rgba(64, 64, 85, 0.3);
+        }
+
+        .ia-loading {
+            text-align: center;
+            padding: 40px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+        }
+
+        .ia-loading-spinner {
+            width: 30px; height: 30px;
+            border: 2px solid var(--border-color);
+            border-top-color: var(--accent-cyan);
+            border-radius: 50%;
+            animation: previewSpin 0.8s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        .ia-error {
+            text-align: center;
+            padding: 30px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-orange);
+            letter-spacing: 1px;
+        }
+
+        .ia-last-update {
+            text-align: right;
+            margin-top: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 1200px) {
+            .ia-stats-row { grid-template-columns: repeat(3, 1fr); }
+            .ia-health-grid { grid-template-columns: 1fr; }
+        }
+
         @media (max-width: 768px) {
             .header { flex-direction: column; gap: 20px; }
             .header-left { flex-direction: column; }
@@ -961,6 +1220,9 @@
             .cursor, .cursor-dot { display: none; }
             html, body { cursor: auto; }
             .projects-grid { grid-template-columns: 1fr; }
+            .ia-stats-row { grid-template-columns: 1fr; }
+            .ia-usage-header { flex-direction: column; gap: 15px; }
+            .ia-usage-meta { flex-direction: column; gap: 10px; }
         }
     </style>
 </head>
@@ -1198,6 +1460,44 @@
                 </div>
             </div>
 
+            <!-- USAGE IA SECTION -->
+            <div class="ia-usage-section" id="iaUsageSection">
+                <div class="ia-usage-header">
+                    <h2 class="section-title">Usage IA</h2>
+                    <div class="ia-usage-meta">
+                        <span class="ia-model-badge" id="iaModelBadge">claude-opus-4-6</span>
+                        <div class="ia-live-indicator">
+                            <div class="ia-live-dot"></div>
+                            <span>LIVE MONITORING</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ia-stats-row">
+                    <div class="ia-stat-card" style="--ia-stat-color: var(--accent-cyan);">
+                        <div class="ia-stat-value" id="iaTotalSessions">-</div>
+                        <div class="ia-stat-label">Sessions Actives</div>
+                    </div>
+                    <div class="ia-stat-card" style="--ia-stat-color: var(--accent-purple);">
+                        <div class="ia-stat-value" id="iaModel">Opus</div>
+                        <div class="ia-stat-label">Modele IA</div>
+                    </div>
+                    <div class="ia-stat-card" style="--ia-stat-color: var(--accent-green);">
+                        <div class="ia-stat-value" id="iaVpsStatus">--</div>
+                        <div class="ia-stat-label">Statut VPS</div>
+                    </div>
+                </div>
+
+                <div id="iaHealthGrid" class="ia-health-grid">
+                    <div class="ia-loading">
+                        <div class="ia-loading-spinner"></div>
+                        CONNEXION AU VPS...
+                    </div>
+                </div>
+
+                <div class="ia-last-update" id="iaLastUpdate"></div>
+            </div>
+
             <div class="agent-section">
                 <div class="agent-content">
                     <div class="agent-info">
@@ -1378,7 +1678,113 @@
         }
         initPreviews();
 
+        // === USAGE IA - Polling API ===
+        const IA_API_URL = '/api/ia-usage';
+        const IA_POLL_INTERVAL = 30000; // 30 secondes
+
+        const projectIcons = {
+            'fxscale-dashboard': '⚡',
+            'closer-crm': '📊',
+            'trading-intelligence': '📈',
+            'telegram-monitor': '📡',
+            'lp-createur': '🎨',
+            'analyseur-creatives': '🔍',
+            'generateur-creas-sth': '🎨'
+        };
+
+        async function fetchIAUsage() {
+            try {
+                const response = await fetch(IA_API_URL);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const data = await response.json();
+                renderIAUsage(data);
+            } catch (err) {
+                renderIAError(err.message);
+            }
+        }
+
+        function renderIAUsage(data) {
+            // Update stat cards
+            const totalEl = document.getElementById('iaTotalSessions');
+            const modelEl = document.getElementById('iaModel');
+            const vpsEl = document.getElementById('iaVpsStatus');
+
+            totalEl.textContent = data.totalActive;
+            modelEl.textContent = 'Opus';
+            vpsEl.textContent = data.totalActive > 0 ? 'ACTIF' : 'IDLE';
+
+            // Update model badge
+            document.getElementById('iaModelBadge').textContent = data.model;
+
+            // Build health grid
+            const grid = document.getElementById('iaHealthGrid');
+            let html = '';
+
+            if (data.health) {
+                const entries = Object.entries(data.health);
+                for (const [projectId, info] of entries) {
+                    const isActive = info.active;
+                    const icon = projectIcons[projectId] || '📦';
+                    const session = info.session;
+                    const uptime = session ? session.uptime : '--';
+
+                    html += `
+                        <div class="ia-health-card ${isActive ? 'active' : 'inactive'}">
+                            <div class="ia-health-left">
+                                <div class="ia-health-status"></div>
+                                <span class="ia-health-name">${icon} ${info.name}</span>
+                            </div>
+                            <div class="ia-health-right">
+                                ${isActive ? `<span class="ia-health-uptime">${uptime}</span>` : ''}
+                                <span class="ia-health-badge">${isActive ? 'ACTIF' : 'INACTIF'}</span>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            grid.innerHTML = html;
+
+            // Update last refresh time
+            const now = new Date();
+            document.getElementById('iaLastUpdate').textContent =
+                `Derniere mise a jour : ${now.toLocaleTimeString('fr-FR')} — Refresh auto toutes les 30s`;
+        }
+
+        function renderIAError(message) {
+            const grid = document.getElementById('iaHealthGrid');
+            grid.innerHTML = `
+                <div class="ia-error">
+                    ⚠ Impossible de contacter l'API — ${message}<br>
+                    <small>Prochaine tentative dans 30s</small>
+                </div>
+            `;
+            document.getElementById('iaTotalSessions').textContent = '?';
+            document.getElementById('iaVpsStatus').textContent = 'N/A';
+        }
+
+        // Start polling when dashboard is visible
+        function startIAPolling() {
+            fetchIAUsage();
+            setInterval(fetchIAUsage, IA_POLL_INTERVAL);
+        }
+
+        // Initialize after login or if already authenticated
+        if (sessionStorage.getItem('fxscale_auth') === 'true') {
+            startIAPolling();
+        }
+
+        // Patch login to also start polling
+        const originalAttemptLogin = attemptLogin;
+        attemptLogin = function() {
+            originalAttemptLogin();
+            if (sessionStorage.getItem('fxscale_auth') === 'true') {
+                setTimeout(startIAPolling, 500);
+            }
+        };
+
         console.log('%c🚀 FXSCALE IA - Command Center Loaded', 'color: #00f0ff; font-size: 20px; font-weight: bold;');
+        console.log('%c📡 IA Usage monitoring active - polling every 30s', 'color: #a855f7; font-size: 12px;');
     </script>
 </body>
 </html>
