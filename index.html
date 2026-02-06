@@ -952,6 +952,50 @@
             .projects-grid { grid-template-columns: 1fr; }
         }
 
+        /* === AI AGENT BADGE ON PROJECT CARDS === */
+        .project-ai-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            padding: 5px 10px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 2;
+        }
+
+        .project-ai-badge .ai-badge-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+        }
+
+        .project-ai-badge.ai-active {
+            background: rgba(0, 255, 136, 0.15);
+            color: var(--accent-green);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .project-ai-badge.ai-active .ai-badge-dot {
+            background: var(--accent-green);
+            box-shadow: 0 0 8px var(--accent-green);
+            animation: statusPulse 2s infinite;
+        }
+
+        .project-ai-badge.ai-inactive {
+            background: rgba(64, 64, 85, 0.2);
+            color: var(--text-muted);
+            border: 1px solid rgba(64, 64, 85, 0.3);
+        }
+
+        .project-ai-badge.ai-inactive .ai-badge-dot {
+            background: var(--text-muted);
+        }
+
         /* === USAGE IA SECTION === */
         .ia-usage-section {
             margin-top: 50px;
@@ -1300,166 +1344,6 @@
                 </div>
             </div>
 
-            <div class="section-header">
-                <h2 class="section-title">Mes Projets</h2>
-                <button class="open-all-btn" onclick="launchAllAgents()">🚀 Ouvrir tous les projets</button>
-            </div>
-
-            <div class="projects-grid">
-                <div class="project-card" data-color="gold">
-                    <div class="project-header">
-                        <div class="project-icon">⚡</div>
-                        <div class="project-status"><div class="project-status-dot"></div><span>EN LIGNE</span></div>
-                    </div>
-                    <h3 class="project-name">FXSCALE DASHBOARD <span class="project-badge">MAIN</span></h3>
-                    <p class="project-desc">Dashboard central de commande FXSCALE IA. Interface centralisee pour gerer tous les projets et agents.</p>
-                    <div class="project-preview" data-url="https://fxscale-dashboard-production.up.railway.app">
-                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
-                        <div class="project-preview-fallback"><span class="fallback-icon">⚡</span><span class="fallback-text">Apercu indisponible</span></div>
-                    </div>
-                    <div class="project-tags">
-                        <span class="project-tag">HTML/CSS/JS</span>
-                        <span class="project-tag">NGINX</span>
-                        <span class="project-tag">RAILWAY</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="https://fxscale-dashboard-production.up.railway.app" target="_blank" class="project-btn project-btn-primary">🔗 Ouvrir</a>
-                        <button class="project-btn project-btn-secondary" onclick="launchAgent('fxscale-dashboard')">🤖 Agent IA</button>
-                    </div>
-                </div>
-
-                <div class="project-card" data-color="cyan">
-                    <div class="project-header">
-                        <div class="project-icon">📊</div>
-                        <div class="project-status"><div class="project-status-dot"></div><span>EN LIGNE</span></div>
-                    </div>
-                    <h3 class="project-name">CLOSER CRM</h3>
-                    <p class="project-desc">CRM avance pour la gestion des leads Telegram. Systeme de tagging, follow-up automatise et analytics.</p>
-                    <div class="project-preview" data-url="https://closer-crm-production.up.railway.app">
-                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
-                        <div class="project-preview-fallback"><span class="fallback-icon">📊</span><span class="fallback-text">Apercu indisponible</span></div>
-                    </div>
-                    <div class="project-tags">
-                        <span class="project-tag">PYTHON</span>
-                        <span class="project-tag">RAILWAY</span>
-                        <span class="project-tag">TELEGRAM</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="https://closer-crm-production.up.railway.app" target="_blank" class="project-btn project-btn-primary">🔗 Ouvrir</a>
-                        <button class="project-btn project-btn-secondary" onclick="launchAgent('closer-crm')">🤖 Agent IA</button>
-                    </div>
-                </div>
-
-                <div class="project-card" data-color="green">
-                    <div class="project-header">
-                        <div class="project-icon">📈</div>
-                        <div class="project-status"><div class="project-status-dot"></div><span>EN LIGNE</span></div>
-                    </div>
-                    <h3 class="project-name">TRADING INTELLIGENCE</h3>
-                    <p class="project-desc">Systeme d'analyse MetaTrader avec liquidation heatmaps et segmentation des traders.</p>
-                    <div class="project-preview">
-                        <div class="project-preview-fallback"><span class="fallback-icon">📈</span><span class="fallback-text">Preview en cours de configuration</span></div>
-                    </div>
-                    <div class="project-tags">
-                        <span class="project-tag">METATRADER</span>
-                        <span class="project-tag">ANALYTICS</span>
-                        <span class="project-tag">DASHBOARD</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="#" class="project-btn project-btn-primary" id="trading-url">🔗 Ouvrir</a>
-                        <button class="project-btn project-btn-secondary" onclick="launchAgent('trading-intelligence')">🤖 Agent IA</button>
-                    </div>
-                </div>
-
-                <div class="project-card" data-color="purple">
-                    <div class="project-header">
-                        <div class="project-icon">📡</div>
-                        <div class="project-status"><div class="project-status-dot"></div><span>EN LIGNE</span></div>
-                    </div>
-                    <h3 class="project-name">TELEGRAM MONITORING</h3>
-                    <p class="project-desc">Dashboards Streamlit pour tracker les leads et l'activite des channels.</p>
-                    <div class="project-preview" data-url="https://telegram-monitor-production-cf63.up.railway.app/">
-                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
-                        <div class="project-preview-fallback"><span class="fallback-icon">📡</span><span class="fallback-text">Apercu indisponible</span></div>
-                    </div>
-                    <div class="project-tags">
-                        <span class="project-tag">STREAMLIT</span>
-                        <span class="project-tag">MONITORING</span>
-                        <span class="project-tag">ALERTS</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="https://telegram-monitor-production-cf63.up.railway.app/" target="_blank" class="project-btn project-btn-primary" id="telegram-url">🔗 Ouvrir</a>
-                        <button class="project-btn project-btn-secondary" onclick="launchAgent('telegram-monitoring')">🤖 Agent IA</button>
-                    </div>
-                </div>
-
-                <div class="project-card" data-color="orange">
-                    <div class="project-header">
-                        <div class="project-icon">🎨</div>
-                        <div class="project-status dev"><div class="project-status-dot"></div><span>DEV</span></div>
-                    </div>
-                    <h3 class="project-name">LP CREATEUR</h3>
-                    <p class="project-desc">Generateur de landing pages optimisees pour la conversion. Templates et A/B testing.</p>
-                    <div class="project-preview" data-url="https://choice-lp-production.up.railway.app/">
-                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
-                        <div class="project-preview-fallback"><span class="fallback-icon">🎨</span><span class="fallback-text">Apercu indisponible</span></div>
-                    </div>
-                    <div class="project-tags">
-                        <span class="project-tag">LANDING PAGE</span>
-                        <span class="project-tag">CONVERSION</span>
-                        <span class="project-tag">A/B TEST</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="https://choice-lp-production.up.railway.app/" target="_blank" class="project-btn project-btn-primary" id="lp-url">🔗 Ouvrir</a>
-                        <button class="project-btn project-btn-secondary" onclick="launchAgent('lp-createur')">🤖 Agent IA</button>
-                    </div>
-                </div>
-
-                <div class="project-card" data-color="pink">
-                    <div class="project-header">
-                        <div class="project-icon">🔍</div>
-                        <div class="project-status dev"><div class="project-status-dot"></div><span>DEV</span></div>
-                    </div>
-                    <h3 class="project-name">ANALYSEUR CREATIVES</h3>
-                    <p class="project-desc">Analyse IA des creatives publicitaires. Scoring et benchmark concurrentiel.</p>
-                    <div class="project-preview" data-url="https://fx-scaleads-production.up.railway.app/">
-                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
-                        <div class="project-preview-fallback"><span class="fallback-icon">🔍</span><span class="fallback-text">Apercu indisponible</span></div>
-                    </div>
-                    <div class="project-tags">
-                        <span class="project-tag">AI ANALYSIS</span>
-                        <span class="project-tag">ADS</span>
-                        <span class="project-tag">SCORING</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="https://fx-scaleads-production.up.railway.app/" target="_blank" class="project-btn project-btn-primary" id="creatives-url">🔗 Ouvrir</a>
-                        <button class="project-btn project-btn-secondary" onclick="launchAgent('analyseur-creatives')">🤖 Agent IA</button>
-                    </div>
-                </div>
-
-                <div class="project-card" data-color="cyan">
-                    <div class="project-header">
-                        <div class="project-icon">🎨</div>
-                        <div class="project-status"><div class="project-status-dot"></div><span>EN LIGNE</span></div>
-                    </div>
-                    <h3 class="project-name">GÉNÉRATEUR CRÉAS STH</h3>
-                    <p class="project-desc">Génération de créatives publicitaires Meta Ads. Analyse et création automatique de visuels.</p>
-                    <div class="project-preview" data-url="https://frontend-production-62d5.up.railway.app">
-                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
-                        <div class="project-preview-fallback"><span class="fallback-icon">🎨</span><span class="fallback-text">Apercu indisponible</span></div>
-                    </div>
-                    <div class="project-tags">
-                        <span class="project-tag">AI GENERATION</span>
-                        <span class="project-tag">CREATIVES</span>
-                        <span class="project-tag">META ADS</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="https://frontend-production-62d5.up.railway.app" target="_blank" class="project-btn project-btn-primary">🔗 Ouvrir</a>
-                        <button class="project-btn project-btn-secondary" onclick="launchAgent('generateur-creas-sth')">🤖 Agent IA</button>
-                    </div>
-                </div>
-            </div>
-
             <!-- USAGE IA SECTION -->
             <div class="ia-usage-section" id="iaUsageSection">
                 <div class="ia-usage-header">
@@ -1496,6 +1380,166 @@
                 </div>
 
                 <div class="ia-last-update" id="iaLastUpdate"></div>
+            </div>
+
+            <div class="section-header">
+                <h2 class="section-title">Mes Projets</h2>
+                <button class="open-all-btn" onclick="launchAllAgents()">🚀 Ouvrir tous les projets</button>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card" data-color="gold" data-project="fxscale-dashboard">
+                    <div class="project-header">
+                        <div class="project-icon">⚡</div>
+                        <div class="project-status"><div class="project-status-dot"></div><span>EN LIGNE</span></div>
+                    </div>
+                    <h3 class="project-name">FXSCALE DASHBOARD <span class="project-badge">MAIN</span></h3>
+                    <p class="project-desc">Dashboard central de commande FXSCALE IA. Interface centralisee pour gerer tous les projets et agents.</p>
+                    <div class="project-preview" data-url="https://fxscale-dashboard-production.up.railway.app">
+                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
+                        <div class="project-preview-fallback"><span class="fallback-icon">⚡</span><span class="fallback-text">Apercu indisponible</span></div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">HTML/CSS/JS</span>
+                        <span class="project-tag">NGINX</span>
+                        <span class="project-tag">RAILWAY</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://fxscale-dashboard-production.up.railway.app" target="_blank" class="project-btn project-btn-primary">🔗 Ouvrir</a>
+                        <button class="project-btn project-btn-secondary" onclick="launchAgent('fxscale-dashboard')">🤖 Agent IA</button>
+                    </div>
+                </div>
+
+                <div class="project-card" data-color="cyan" data-project="closer-crm">
+                    <div class="project-header">
+                        <div class="project-icon">📊</div>
+                        <div class="project-status"><div class="project-status-dot"></div><span>EN LIGNE</span></div>
+                    </div>
+                    <h3 class="project-name">CLOSER CRM</h3>
+                    <p class="project-desc">CRM avance pour la gestion des leads Telegram. Systeme de tagging, follow-up automatise et analytics.</p>
+                    <div class="project-preview" data-url="https://closer-crm-production.up.railway.app">
+                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
+                        <div class="project-preview-fallback"><span class="fallback-icon">📊</span><span class="fallback-text">Apercu indisponible</span></div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">PYTHON</span>
+                        <span class="project-tag">RAILWAY</span>
+                        <span class="project-tag">TELEGRAM</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://closer-crm-production.up.railway.app" target="_blank" class="project-btn project-btn-primary">🔗 Ouvrir</a>
+                        <button class="project-btn project-btn-secondary" onclick="launchAgent('closer-crm')">🤖 Agent IA</button>
+                    </div>
+                </div>
+
+                <div class="project-card" data-color="green" data-project="trading-intelligence">
+                    <div class="project-header">
+                        <div class="project-icon">📈</div>
+                        <div class="project-status"><div class="project-status-dot"></div><span>EN LIGNE</span></div>
+                    </div>
+                    <h3 class="project-name">TRADING INTELLIGENCE</h3>
+                    <p class="project-desc">Systeme d'analyse MetaTrader avec liquidation heatmaps et segmentation des traders.</p>
+                    <div class="project-preview">
+                        <div class="project-preview-fallback"><span class="fallback-icon">📈</span><span class="fallback-text">Preview en cours de configuration</span></div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">METATRADER</span>
+                        <span class="project-tag">ANALYTICS</span>
+                        <span class="project-tag">DASHBOARD</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="#" class="project-btn project-btn-primary" id="trading-url">🔗 Ouvrir</a>
+                        <button class="project-btn project-btn-secondary" onclick="launchAgent('trading-intelligence')">🤖 Agent IA</button>
+                    </div>
+                </div>
+
+                <div class="project-card" data-color="purple" data-project="telegram-monitor">
+                    <div class="project-header">
+                        <div class="project-icon">📡</div>
+                        <div class="project-status"><div class="project-status-dot"></div><span>EN LIGNE</span></div>
+                    </div>
+                    <h3 class="project-name">TELEGRAM MONITORING</h3>
+                    <p class="project-desc">Dashboards Streamlit pour tracker les leads et l'activite des channels.</p>
+                    <div class="project-preview" data-url="https://telegram-monitor-production-cf63.up.railway.app/">
+                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
+                        <div class="project-preview-fallback"><span class="fallback-icon">📡</span><span class="fallback-text">Apercu indisponible</span></div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">STREAMLIT</span>
+                        <span class="project-tag">MONITORING</span>
+                        <span class="project-tag">ALERTS</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://telegram-monitor-production-cf63.up.railway.app/" target="_blank" class="project-btn project-btn-primary" id="telegram-url">🔗 Ouvrir</a>
+                        <button class="project-btn project-btn-secondary" onclick="launchAgent('telegram-monitoring')">🤖 Agent IA</button>
+                    </div>
+                </div>
+
+                <div class="project-card" data-color="orange" data-project="lp-createur">
+                    <div class="project-header">
+                        <div class="project-icon">🎨</div>
+                        <div class="project-status dev"><div class="project-status-dot"></div><span>DEV</span></div>
+                    </div>
+                    <h3 class="project-name">LP CREATEUR</h3>
+                    <p class="project-desc">Generateur de landing pages optimisees pour la conversion. Templates et A/B testing.</p>
+                    <div class="project-preview" data-url="https://choice-lp-production.up.railway.app/">
+                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
+                        <div class="project-preview-fallback"><span class="fallback-icon">🎨</span><span class="fallback-text">Apercu indisponible</span></div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">LANDING PAGE</span>
+                        <span class="project-tag">CONVERSION</span>
+                        <span class="project-tag">A/B TEST</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://choice-lp-production.up.railway.app/" target="_blank" class="project-btn project-btn-primary" id="lp-url">🔗 Ouvrir</a>
+                        <button class="project-btn project-btn-secondary" onclick="launchAgent('lp-createur')">🤖 Agent IA</button>
+                    </div>
+                </div>
+
+                <div class="project-card" data-color="pink" data-project="analyseur-creatives">
+                    <div class="project-header">
+                        <div class="project-icon">🔍</div>
+                        <div class="project-status dev"><div class="project-status-dot"></div><span>DEV</span></div>
+                    </div>
+                    <h3 class="project-name">ANALYSEUR CREATIVES</h3>
+                    <p class="project-desc">Analyse IA des creatives publicitaires. Scoring et benchmark concurrentiel.</p>
+                    <div class="project-preview" data-url="https://fx-scaleads-production.up.railway.app/">
+                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
+                        <div class="project-preview-fallback"><span class="fallback-icon">🔍</span><span class="fallback-text">Apercu indisponible</span></div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">AI ANALYSIS</span>
+                        <span class="project-tag">ADS</span>
+                        <span class="project-tag">SCORING</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://fx-scaleads-production.up.railway.app/" target="_blank" class="project-btn project-btn-primary" id="creatives-url">🔗 Ouvrir</a>
+                        <button class="project-btn project-btn-secondary" onclick="launchAgent('analyseur-creatives')">🤖 Agent IA</button>
+                    </div>
+                </div>
+
+                <div class="project-card" data-color="cyan" data-project="generateur-creas-sth">
+                    <div class="project-header">
+                        <div class="project-icon">🎨</div>
+                        <div class="project-status"><div class="project-status-dot"></div><span>EN LIGNE</span></div>
+                    </div>
+                    <h3 class="project-name">GÉNÉRATEUR CRÉAS STH</h3>
+                    <p class="project-desc">Génération de créatives publicitaires Meta Ads. Analyse et création automatique de visuels.</p>
+                    <div class="project-preview" data-url="https://frontend-production-62d5.up.railway.app">
+                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
+                        <div class="project-preview-fallback"><span class="fallback-icon">🎨</span><span class="fallback-text">Apercu indisponible</span></div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">AI GENERATION</span>
+                        <span class="project-tag">CREATIVES</span>
+                        <span class="project-tag">META ADS</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://frontend-production-62d5.up.railway.app" target="_blank" class="project-btn project-btn-primary">🔗 Ouvrir</a>
+                        <button class="project-btn project-btn-secondary" onclick="launchAgent('generateur-creas-sth')">🤖 Agent IA</button>
+                    </div>
+                </div>
             </div>
 
             <div class="agent-section">
@@ -1744,6 +1788,25 @@
             }
 
             grid.innerHTML = html;
+
+            // Update AI badges on project cards
+            if (data.health) {
+                document.querySelectorAll('.project-card[data-project]').forEach(card => {
+                    const projectId = card.dataset.project;
+                    const info = data.health[projectId];
+                    const isActive = info && info.active;
+
+                    // Remove existing badge if any
+                    const existing = card.querySelector('.project-ai-badge');
+                    if (existing) existing.remove();
+
+                    // Create badge
+                    const badge = document.createElement('div');
+                    badge.className = `project-ai-badge ${isActive ? 'ai-active' : 'ai-inactive'}`;
+                    badge.innerHTML = `<span class="ai-badge-dot"></span>${isActive ? 'AGENT ACTIF' : 'AGENT OFF'}`;
+                    card.appendChild(badge);
+                });
+            }
 
             // Update last refresh time
             const now = new Date();
