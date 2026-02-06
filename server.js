@@ -32,11 +32,11 @@ app.get('/api/ia-usage', (req, res) => {
             });
         });
         request.on('error', () => {
-            res.json(fallbackResponse('VPS monitor unreachable'));
+            if (!res.headersSent) res.json(fallbackResponse('VPS monitor unreachable'));
         });
         request.on('timeout', () => {
             request.destroy();
-            res.json(fallbackResponse('VPS monitor timeout'));
+            if (!res.headersSent) res.json(fallbackResponse('VPS monitor timeout'));
         });
     } else {
         // On VPS: direct process detection
