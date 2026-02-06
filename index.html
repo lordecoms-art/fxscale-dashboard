@@ -745,6 +745,85 @@
             letter-spacing: 1px;
         }
 
+        .project-preview {
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .project-preview iframe {
+            width: 1280px;
+            height: 800px;
+            border: none;
+            transform: scale(0.29);
+            transform-origin: top left;
+            pointer-events: none;
+        }
+
+        .project-preview-fallback {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: linear-gradient(135deg, rgba(15, 15, 24, 0.95), rgba(10, 10, 18, 0.98));
+            z-index: 2;
+            transition: opacity 0.5s;
+        }
+
+        .project-preview-fallback.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .project-preview-fallback .fallback-icon {
+            font-size: 2.5rem;
+            opacity: 0.6;
+        }
+
+        .project-preview-fallback .fallback-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .project-preview-loading {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            background: var(--bg-primary);
+        }
+
+        .project-preview-loading.hidden {
+            display: none;
+        }
+
+        .preview-spinner {
+            width: 24px; height: 24px;
+            border: 2px solid var(--border-color);
+            border-top-color: var(--card-color);
+            border-radius: 50%;
+            animation: previewSpin 0.8s linear infinite;
+        }
+
+        @keyframes previewSpin {
+            to { transform: rotate(360deg); }
+        }
+
         .project-actions {
             display: flex;
             gap: 12px;
@@ -972,6 +1051,10 @@
                     </div>
                     <h3 class="project-name">FXSCALE DASHBOARD <span class="project-badge">MAIN</span></h3>
                     <p class="project-desc">Dashboard central de commande FXSCALE IA. Interface centralisee pour gerer tous les projets et agents.</p>
+                    <div class="project-preview" data-url="https://fxscale-dashboard-production.up.railway.app">
+                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
+                        <div class="project-preview-fallback"><span class="fallback-icon">⚡</span><span class="fallback-text">Apercu indisponible</span></div>
+                    </div>
                     <div class="project-tags">
                         <span class="project-tag">HTML/CSS/JS</span>
                         <span class="project-tag">NGINX</span>
@@ -990,6 +1073,10 @@
                     </div>
                     <h3 class="project-name">CLOSER CRM</h3>
                     <p class="project-desc">CRM avance pour la gestion des leads Telegram. Systeme de tagging, follow-up automatise et analytics.</p>
+                    <div class="project-preview" data-url="https://closer-crm-production.up.railway.app">
+                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
+                        <div class="project-preview-fallback"><span class="fallback-icon">📊</span><span class="fallback-text">Apercu indisponible</span></div>
+                    </div>
                     <div class="project-tags">
                         <span class="project-tag">PYTHON</span>
                         <span class="project-tag">RAILWAY</span>
@@ -1008,6 +1095,9 @@
                     </div>
                     <h3 class="project-name">TRADING INTELLIGENCE</h3>
                     <p class="project-desc">Systeme d'analyse MetaTrader avec liquidation heatmaps et segmentation des traders.</p>
+                    <div class="project-preview">
+                        <div class="project-preview-fallback"><span class="fallback-icon">📈</span><span class="fallback-text">Preview en cours de configuration</span></div>
+                    </div>
                     <div class="project-tags">
                         <span class="project-tag">METATRADER</span>
                         <span class="project-tag">ANALYTICS</span>
@@ -1026,6 +1116,10 @@
                     </div>
                     <h3 class="project-name">TELEGRAM MONITORING</h3>
                     <p class="project-desc">Dashboards Streamlit pour tracker les leads et l'activite des channels.</p>
+                    <div class="project-preview" data-url="https://telegram-monitor-production-cf63.up.railway.app/">
+                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
+                        <div class="project-preview-fallback"><span class="fallback-icon">📡</span><span class="fallback-text">Apercu indisponible</span></div>
+                    </div>
                     <div class="project-tags">
                         <span class="project-tag">STREAMLIT</span>
                         <span class="project-tag">MONITORING</span>
@@ -1044,6 +1138,10 @@
                     </div>
                     <h3 class="project-name">LP CREATEUR</h3>
                     <p class="project-desc">Generateur de landing pages optimisees pour la conversion. Templates et A/B testing.</p>
+                    <div class="project-preview" data-url="https://choice-lp-production.up.railway.app/">
+                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
+                        <div class="project-preview-fallback"><span class="fallback-icon">🎨</span><span class="fallback-text">Apercu indisponible</span></div>
+                    </div>
                     <div class="project-tags">
                         <span class="project-tag">LANDING PAGE</span>
                         <span class="project-tag">CONVERSION</span>
@@ -1062,6 +1160,10 @@
                     </div>
                     <h3 class="project-name">ANALYSEUR CREATIVES</h3>
                     <p class="project-desc">Analyse IA des creatives publicitaires. Scoring et benchmark concurrentiel.</p>
+                    <div class="project-preview" data-url="https://fx-scaleads-production.up.railway.app/">
+                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
+                        <div class="project-preview-fallback"><span class="fallback-icon">🔍</span><span class="fallback-text">Apercu indisponible</span></div>
+                    </div>
                     <div class="project-tags">
                         <span class="project-tag">AI ANALYSIS</span>
                         <span class="project-tag">ADS</span>
@@ -1080,6 +1182,10 @@
                     </div>
                     <h3 class="project-name">GÉNÉRATEUR CRÉAS STH</h3>
                     <p class="project-desc">Génération de créatives publicitaires Meta Ads. Analyse et création automatique de visuels.</p>
+                    <div class="project-preview" data-url="https://frontend-production-62d5.up.railway.app">
+                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
+                        <div class="project-preview-fallback"><span class="fallback-icon">🎨</span><span class="fallback-text">Apercu indisponible</span></div>
+                    </div>
                     <div class="project-tags">
                         <span class="project-tag">AI GENERATION</span>
                         <span class="project-tag">CREATIVES</span>
@@ -1239,6 +1345,38 @@
             document.head.appendChild(slideStyle);
             setTimeout(() => { notification.style.animation = 'slideIn 0.3s ease-out reverse'; setTimeout(() => notification.remove(), 300); }, 3000);
         }
+
+        // Charge les iframes de preview avec lazy loading et fallback
+        function initPreviews() {
+            document.querySelectorAll('.project-preview[data-url]').forEach(container => {
+                const url = container.dataset.url;
+                const loading = container.querySelector('.project-preview-loading');
+                const fallback = container.querySelector('.project-preview-fallback');
+                const iframe = document.createElement('iframe');
+                iframe.src = url;
+                iframe.setAttribute('loading', 'lazy');
+                iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+                iframe.setAttribute('title', 'Preview');
+
+                let loaded = false;
+                iframe.addEventListener('load', () => {
+                    loaded = true;
+                    if (loading) loading.classList.add('hidden');
+                    if (fallback) fallback.classList.add('hidden');
+                });
+
+                // Fallback timeout : si pas charge apres 8s, affiche le placeholder
+                setTimeout(() => {
+                    if (!loaded) {
+                        if (loading) loading.classList.add('hidden');
+                        // Le fallback reste visible
+                    }
+                }, 8000);
+
+                container.insertBefore(iframe, loading);
+            });
+        }
+        initPreviews();
 
         console.log('%c🚀 FXSCALE IA - Command Center Loaded', 'color: #00f0ff; font-size: 20px; font-weight: bold;');
     </script>
