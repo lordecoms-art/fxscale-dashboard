@@ -15,7 +15,8 @@ const projectPaths = {
     'telegram-monitor': '/root/projects/telegram-monitor',
     'lp-createur': '/root/projects/lp-createur',
     'analyseur-creatives': '/root/projects/analyseur-creatives',
-    'generateur-creas-sth': '/root/projects/generateur-creas-sth'
+    'generateur-creas-sth': '/root/projects/generateur-creas-sth',
+    'spy-affiliation-trading': '/root/projects/spy-affiliation-trading'
 };
 
 const projectNames = {
@@ -25,7 +26,8 @@ const projectNames = {
     'telegram-monitor': 'Telegram Monitoring',
     'lp-createur': 'LP Createur',
     'analyseur-creatives': 'Analyseur Creatives',
-    'generateur-creas-sth': 'Générateur Créas STH'
+    'generateur-creas-sth': 'Générateur Créas STH',
+    'spy-affiliation-trading': 'Spy Affiliation Trading'
 };
 
 function formatUptime(seconds) {

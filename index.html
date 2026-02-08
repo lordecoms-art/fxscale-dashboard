@@ -606,6 +606,7 @@
         .project-card:nth-child(5) { animation-delay: 0.5s; }
         .project-card:nth-child(6) { animation-delay: 0.6s; }
         .project-card:nth-child(7) { animation-delay: 0.7s; }
+        .project-card:nth-child(8) { animation-delay: 0.8s; }
 
         .project-card::before {
             content: '';
@@ -1544,6 +1545,28 @@
                         <button class="project-btn project-btn-secondary" onclick="launchAgent('generateur-creas-sth')">🤖 Agent IA</button>
                     </div>
                 </div>
+
+                <div class="project-card" data-color="orange" data-project="spy-affiliation-trading">
+                    <div class="project-header">
+                        <div class="project-icon">🕵️</div>
+                        <div class="project-status"><div class="project-status-dot"></div><span>EN LIGNE</span></div>
+                    </div>
+                    <h3 class="project-name">SPY AFFILIATION TRADING</h3>
+                    <p class="project-desc">Dashboard d'intelligence compétitive pour l'affiliation trading sur Telegram</p>
+                    <div class="project-preview" data-url="https://frontend-production-6b9c.up.railway.app">
+                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
+                        <div class="project-preview-fallback"><span class="fallback-icon">🕵️</span><span class="fallback-text">Apercu indisponible</span></div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">INTELLIGENCE</span>
+                        <span class="project-tag">TELEGRAM</span>
+                        <span class="project-tag">TRADING</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://frontend-production-6b9c.up.railway.app" target="_blank" class="project-btn project-btn-primary">🔗 Ouvrir</a>
+                        <button class="project-btn project-btn-secondary" onclick="launchAgent('spy-affiliation-trading')">🤖 Agent IA</button>
+                    </div>
+                </div>
             </div>
 
             <div class="agent-section">
@@ -1655,7 +1678,8 @@
             { id: 'telegram-monitoring', name: 'Telegram Monitoring', path: '/root/projects/telegram-monitor' },
             { id: 'lp-createur', name: 'LP Createur', path: '/root/projects/lp-createur' },
             { id: 'analyseur-creatives', name: 'Analyseur de Creatives', path: '/root/projects/analyseur-creatives' },
-            { id: 'generateur-creas-sth', name: 'Générateur Créas STH', path: '/root/projects/generateur-creas-sth' }
+            { id: 'generateur-creas-sth', name: 'Générateur Créas STH', path: '/root/projects/generateur-creas-sth' },
+            { id: 'spy-affiliation-trading', name: 'Spy Affiliation Trading', path: '/root/projects/spy-affiliation-trading' }
         ];
 
         function launchAgent(projectId) {
@@ -1672,7 +1696,7 @@
         }
 
         function launchAllAgents() {
-            showNotification('🚀 Ouverture des 7 projets en cours...');
+            showNotification('🚀 Ouverture des 8 projets en cours...');
             agentProjects.forEach((project, index) => {
                 setTimeout(() => {
                     const url = 'vscode://vscode-remote/ssh-remote+root@46.224.228.65' + project.path + '?windowId=_blank';
@@ -1737,7 +1761,8 @@
             'telegram-monitor': '📡',
             'lp-createur': '🎨',
             'analyseur-creatives': '🔍',
-            'generateur-creas-sth': '🎨'
+            'generateur-creas-sth': '🎨',
+            'spy-affiliation-trading': '🕵️'
         };
 
         async function fetchIAUsage() {

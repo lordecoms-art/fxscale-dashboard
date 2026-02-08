@@ -52,7 +52,8 @@ function fallbackResponse(error) {
         'telegram-monitor': 'Telegram Monitoring',
         'lp-createur': 'LP Createur',
         'analyseur-creatives': 'Analyseur Creatives',
-        'generateur-creas-sth': 'Générateur Créas STH'
+        'generateur-creas-sth': 'Générateur Créas STH',
+        'spy-affiliation-trading': 'Spy Affiliation Trading'
     };
     const health = {};
     for (const [id, name] of Object.entries(projectNames)) {
@@ -77,7 +78,8 @@ function detectLocalSessions(res) {
         'telegram-monitor': '/root/projects/telegram-monitor',
         'lp-createur': '/root/projects/lp-createur',
         'analyseur-creatives': '/root/projects/analyseur-creatives',
-        'generateur-creas-sth': '/root/projects/generateur-creas-sth'
+        'generateur-creas-sth': '/root/projects/generateur-creas-sth',
+        'spy-affiliation-trading': '/root/projects/spy-affiliation-trading'
     };
 
     const projectNames = {
@@ -87,7 +89,8 @@ function detectLocalSessions(res) {
         'telegram-monitor': 'Telegram Monitoring',
         'lp-createur': 'LP Createur',
         'analyseur-creatives': 'Analyseur Creatives',
-        'generateur-creas-sth': 'Générateur Créas STH'
+        'generateur-creas-sth': 'Générateur Créas STH',
+        'spy-affiliation-trading': 'Spy Affiliation Trading'
     };
 
     exec('ps aux --no-headers | grep -E "claude" | grep -v grep', (err, stdout) => {
