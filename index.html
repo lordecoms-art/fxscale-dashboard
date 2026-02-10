@@ -1287,24 +1287,55 @@
     </div>
     <div class="scanlines"></div>
 
+    <!-- Auth Guard: redirect to centralized auth if not authenticated -->
     <div class="login-screen" id="loginScreen">
         <div class="login-container">
             <div class="login-logo">FXSCALE IA</div>
-            <div class="login-subtitle">Command Center</div>
-            <div class="login-box">
-                <div class="input-group">
-                    <label class="input-label">Identifiant</label>
-                    <input type="text" class="input-field" id="username" placeholder="Entrez votre identifiant" autocomplete="off">
-                </div>
-                <div class="input-group">
-                    <label class="input-label">Mot de passe</label>
-                    <input type="password" class="input-field" id="password" placeholder="••••••••••">
-                </div>
-                <button class="login-btn" id="loginBtn">Acceder au Dashboard</button>
-                <div class="login-error" id="loginError">Identifiants incorrects</div>
-            </div>
+            <div class="login-subtitle">Vérification de l'authentification...</div>
         </div>
     </div>
+    <script>
+        (function() {
+            const AUTH_SERVICE = 'https://fxscale-auth-production.up.railway.app';
+            const CURRENT_URL = window.location.origin + window.location.pathname;
+
+            // Check for token in URL (redirect back from auth service)
+            const params = new URLSearchParams(window.location.search);
+            const urlToken = params.get('auth_token');
+            if (urlToken) {
+                localStorage.setItem('fxscale_auth_token', urlToken);
+                // Clean URL
+                window.history.replaceState({}, '', window.location.pathname);
+            }
+
+            const token = localStorage.getItem('fxscale_auth_token');
+            if (!token) {
+                window.location.href = AUTH_SERVICE + '/login?redirect=' + encodeURIComponent(CURRENT_URL);
+                return;
+            }
+
+            // Validate token with auth service
+            fetch(AUTH_SERVICE + '/auth/verify-token?token=' + encodeURIComponent(token))
+                .then(r => r.json())
+                .then(data => {
+                    if (data.valid) {
+                        document.getElementById('loginScreen').classList.add('hidden');
+                        document.getElementById('dashboard').classList.add('visible');
+                        window.__fxscale_user = data.user;
+                        window.__fxscale_authenticated = true;
+                    } else {
+                        localStorage.removeItem('fxscale_auth_token');
+                        window.location.href = AUTH_SERVICE + '/login?redirect=' + encodeURIComponent(CURRENT_URL);
+                    }
+                })
+                .catch(() => {
+                    // Auth service unreachable — allow access with existing token (offline fallback)
+                    document.getElementById('loginScreen').classList.add('hidden');
+                    document.getElementById('dashboard').classList.add('visible');
+                    window.__fxscale_authenticated = true;
+                });
+        })();
+    </script>
 
     <div class="dashboard" id="dashboard">
         <div class="container">
@@ -1626,45 +1657,12 @@
             setTimeout(() => particle.remove(), 1000);
         }
 
-        const loginScreen = document.getElementById('loginScreen');
-        const dashboard = document.getElementById('dashboard');
-        const loginBtn = document.getElementById('loginBtn');
-        const loginError = document.getElementById('loginError');
-        const usernameInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
+        const AUTH_SERVICE_URL = 'https://fxscale-auth-production.up.railway.app';
         const logoutBtn = document.getElementById('logoutBtn');
 
-        if (sessionStorage.getItem('fxscale_auth') === 'true') {
-            loginScreen.classList.add('hidden');
-            dashboard.classList.add('visible');
-        }
-
-        function attemptLogin() {
-            if (usernameInput.value === 'fxscale' && passwordInput.value === 'Fxscale5000') {
-                sessionStorage.setItem('fxscale_auth', 'true');
-                loginScreen.classList.add('hidden');
-                setTimeout(() => dashboard.classList.add('visible'), 300);
-                for (let i = 0; i < 50; i++) setTimeout(() => createParticle(window.innerWidth/2+(Math.random()-0.5)*300, window.innerHeight/2+(Math.random()-0.5)*300), i*20);
-            } else {
-                loginError.classList.add('show');
-                usernameInput.style.borderColor = 'var(--accent-pink)';
-                passwordInput.style.borderColor = 'var(--accent-pink)';
-                document.querySelector('.login-box').style.animation = 'shake 0.5s';
-                setTimeout(() => {
-                    document.querySelector('.login-box').style.animation = '';
-                    loginError.classList.remove('show');
-                    usernameInput.style.borderColor = '';
-                    passwordInput.style.borderColor = '';
-                }, 2000);
-            }
-        }
-
-        loginBtn.addEventListener('click', attemptLogin);
-        passwordInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') attemptLogin(); });
         logoutBtn.addEventListener('click', () => {
-            sessionStorage.removeItem('fxscale_auth');
-            dashboard.classList.remove('visible');
-            setTimeout(() => loginScreen.classList.remove('hidden'), 300);
+            localStorage.removeItem('fxscale_auth_token');
+            window.location.href = AUTH_SERVICE_URL + '/login?redirect=' + encodeURIComponent(window.location.origin + window.location.pathname);
         });
 
         const style = document.createElement('style');
@@ -1876,19 +1874,18 @@
             setInterval(fetchIAUsage, IA_POLL_INTERVAL);
         }
 
-        // Initialize after login or if already authenticated
-        if (sessionStorage.getItem('fxscale_auth') === 'true') {
+        // Start polling when authenticated (auth guard already validated)
+        if (window.__fxscale_authenticated) {
             startIAPolling();
+        } else {
+            // Wait for auth guard to finish, then start polling
+            const pollCheck = setInterval(() => {
+                if (window.__fxscale_authenticated) {
+                    clearInterval(pollCheck);
+                    startIAPolling();
+                }
+            }, 500);
         }
-
-        // Patch login to also start polling
-        const originalAttemptLogin = attemptLogin;
-        attemptLogin = function() {
-            originalAttemptLogin();
-            if (sessionStorage.getItem('fxscale_auth') === 'true') {
-                setTimeout(startIAPolling, 500);
-            }
-        };
 
         console.log('%c🚀 FXSCALE IA - Command Center Loaded', 'color: #00f0ff; font-size: 20px; font-weight: bold;');
         console.log('%c📡 IA Usage monitoring active - polling every 30s', 'color: #a855f7; font-size: 12px;');
