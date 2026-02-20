@@ -16,7 +16,8 @@ const projectPaths = {
     'lp-createur': '/root/projects/lp-createur',
     'analyseur-creatives': '/root/projects/analyseur-creatives',
     'generateur-creas-sth': '/root/projects/generateur-creas-sth',
-    'spy-affiliation-trading': '/root/projects/spy-affiliation-trading'
+    'spy-affiliation-trading': '/root/projects/spy-affiliation-trading',
+    'fxscale-mindmap': '/root/projects/fxscale-mindmap'
 };
 
 const projectNames = {
@@ -27,7 +28,8 @@ const projectNames = {
     'lp-createur': 'LP Createur',
     'analyseur-creatives': 'Analyseur Creatives',
     'generateur-creas-sth': 'Générateur Créas STH',
-    'spy-affiliation-trading': 'Spy Affiliation Trading'
+    'spy-affiliation-trading': 'Spy Affiliation Trading',
+    'fxscale-mindmap': 'FXSCALE Mindmap'
 };
 
 function formatUptime(seconds) {
