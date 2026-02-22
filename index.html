@@ -1683,9 +1683,18 @@
         const AUTH_SERVICE_URL = 'https://fxscale-auth-production.up.railway.app';
         const logoutBtn = document.getElementById('logoutBtn');
 
-        logoutBtn.addEventListener('click', () => {
+        logoutBtn.addEventListener('click', async () => {
+            // Clear httpOnly cookies on auth service FIRST, then redirect
+            try {
+                await fetch(AUTH_SERVICE_URL + '/auth/logout', {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+            } catch (e) {
+                // Continue with logout even if cookie clear fails
+            }
             localStorage.removeItem('fxscale_auth_token');
-            window.location.href = AUTH_SERVICE_URL + '/login?redirect=' + encodeURIComponent(window.location.origin + window.location.pathname);
+            window.location.href = AUTH_SERVICE_URL + '/login?redirect=' + encodeURIComponent(window.location.origin + window.location.pathname) + '&logout=1';
         });
 
         const style = document.createElement('style');
