@@ -607,6 +607,8 @@
         .project-card:nth-child(6) { animation-delay: 0.6s; }
         .project-card:nth-child(7) { animation-delay: 0.7s; }
         .project-card:nth-child(8) { animation-delay: 0.8s; }
+        .project-card:nth-child(9) { animation-delay: 0.9s; }
+        .project-card:nth-child(10) { animation-delay: 1.0s; }
 
         .project-card::before {
             content: '';
@@ -1360,7 +1362,7 @@
             <div class="stats-bar">
                 <div class="stat-card" style="--stat-color: var(--accent-cyan);">
                     <div class="stat-icon">🚀</div>
-                    <div class="stat-value">8</div>
+                    <div class="stat-value">9</div>
                     <div class="stat-label">Projets Actifs</div>
                 </div>
                 <div class="stat-card" style="--stat-color: var(--accent-green);">
@@ -1370,7 +1372,7 @@
                 </div>
                 <div class="stat-card" style="--stat-color: var(--accent-orange);">
                     <div class="stat-icon">🔧</div>
-                    <div class="stat-value">2</div>
+                    <div class="stat-value">3</div>
                     <div class="stat-label">En Developpement</div>
                 </div>
                 <div class="stat-card" style="--stat-color: var(--accent-purple);">
@@ -1621,6 +1623,28 @@
                         <button class="project-btn project-btn-secondary" onclick="launchAgent('fxscale-mindmap')">🤖 Agent IA</button>
                     </div>
                 </div>
+
+                <div class="project-card" data-color="green" data-project="todo-mindmap">
+                    <div class="project-header">
+                        <div class="project-icon">✅</div>
+                        <div class="project-status dev"><div class="project-status-dot"></div><span>DEV</span></div>
+                    </div>
+                    <h3 class="project-name">TODO MINDMAP</h3>
+                    <p class="project-desc">App standalone PWA — Todolist + Mindmap visuelle. Installable sur telephone, zero backend.</p>
+                    <div class="project-preview" data-url="">
+                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
+                        <div class="project-preview-fallback"><span class="fallback-icon">✅</span><span class="fallback-text">Pas encore deploye</span></div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">REACT 19</span>
+                        <span class="project-tag">VITE</span>
+                        <span class="project-tag">PWA</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://github.com/lordecoms-art/todo-mindmap" target="_blank" class="project-btn project-btn-primary">📂 GitHub</a>
+                        <button class="project-btn project-btn-secondary" onclick="launchAgent('todo-mindmap')">🤖 Agent IA</button>
+                    </div>
+                </div>
             </div>
 
             <div class="agent-section">
@@ -1704,7 +1728,8 @@
             { id: 'analyseur-creatives', name: 'Analyseur de Creatives', path: '/root/projects/analyseur-creatives' },
             { id: 'generateur-creas-sth', name: 'Générateur Créas STH', path: '/root/projects/generateur-creas-sth' },
             { id: 'spy-affiliation-trading', name: 'Spy Affiliation Trading', path: '/root/projects/spy-affiliation-trading' },
-            { id: 'fxscale-mindmap', name: 'FXSCALE Mindmap', path: '/root/projects/fxscale-mindmap' }
+            { id: 'fxscale-mindmap', name: 'FXSCALE Mindmap', path: '/root/projects/fxscale-mindmap' },
+            { id: 'todo-mindmap', name: 'ToDo Mindmap', path: '/root/projects/todo-mindmap' }
         ];
 
         function launchAgent(projectId) {
@@ -1787,7 +1812,8 @@
             'lp-createur': '🎨',
             'analyseur-creatives': '🔍',
             'generateur-creas-sth': '🎨',
-            'spy-affiliation-trading': '🕵️'
+            'spy-affiliation-trading': '🕵️',
+            'todo-mindmap': '✅'
         };
 
         async function fetchIAUsage() {
