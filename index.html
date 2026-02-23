@@ -609,6 +609,7 @@
         .project-card:nth-child(8) { animation-delay: 0.8s; }
         .project-card:nth-child(9) { animation-delay: 0.9s; }
         .project-card:nth-child(10) { animation-delay: 1.0s; }
+        .project-card:nth-child(11) { animation-delay: 1.1s; }
 
         .project-card::before {
             content: '';
@@ -1362,7 +1363,7 @@
             <div class="stats-bar">
                 <div class="stat-card" style="--stat-color: var(--accent-cyan);">
                     <div class="stat-icon">🚀</div>
-                    <div class="stat-value">10</div>
+                    <div class="stat-value">11</div>
                     <div class="stat-label">Projets Actifs</div>
                 </div>
                 <div class="stat-card" style="--stat-color: var(--accent-green);">
@@ -1372,7 +1373,7 @@
                 </div>
                 <div class="stat-card" style="--stat-color: var(--accent-orange);">
                     <div class="stat-icon">🔧</div>
-                    <div class="stat-value">3</div>
+                    <div class="stat-value">4</div>
                     <div class="stat-label">En Developpement</div>
                 </div>
                 <div class="stat-card" style="--stat-color: var(--accent-purple);">
@@ -1645,6 +1646,31 @@
                         <button class="project-btn project-btn-secondary" onclick="launchAgent('todo-mindmap')">🤖 Agent IA</button>
                     </div>
                 </div>
+
+                <div class="project-card" data-color="pink" data-project="creative-agents">
+                    <div class="project-header">
+                        <div class="project-icon">🎨</div>
+                        <div class="project-status dev"><div class="project-status-dot"></div><span>DEV</span></div>
+                    </div>
+                    <h3 class="project-name">CREATIVE AGENTS</h3>
+                    <p class="project-desc">Systeme multi-agents IA (Strategist + Designer + Critic) pour generer des creatives publicitaires Meta Ads automatiquement. Generation par series de 25, feedback loop humain, multi-produits/multi-angles.</p>
+                    <div class="project-preview" data-url="">
+                        <div class="project-preview-loading"><div class="preview-spinner"></div></div>
+                        <div class="project-preview-fallback"><span class="fallback-icon">🎨</span><span class="fallback-text">En cours de deploiement</span></div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">NEXT.JS</span>
+                        <span class="project-tag">BULL QUEUE</span>
+                        <span class="project-tag">REDIS</span>
+                        <span class="project-tag">CLAUDE API</span>
+                        <span class="project-tag">GEMINI API</span>
+                        <span class="project-tag">PUPPETEER</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://github.com/lordecoms-art/creative-agents" target="_blank" class="project-btn project-btn-primary">📂 GitHub</a>
+                        <button class="project-btn project-btn-secondary" onclick="launchAgent('creative-agents')">🤖 Agent IA</button>
+                    </div>
+                </div>
             </div>
 
             <div class="agent-section">
@@ -1729,7 +1755,8 @@
             { id: 'generateur-creas-sth', name: 'Générateur Créas STH', path: '/root/projects/generateur-creas-sth' },
             { id: 'spy-affiliation-trading', name: 'Spy Affiliation Trading', path: '/root/projects/spy-affiliation-trading' },
             { id: 'fxscale-mindmap', name: 'FXSCALE Mindmap', path: '/root/projects/fxscale-mindmap' },
-            { id: 'todo-mindmap', name: 'ToDo Mindmap', path: '/root/projects/todo-mindmap' }
+            { id: 'todo-mindmap', name: 'ToDo Mindmap', path: '/root/projects/todo-mindmap' },
+            { id: 'creative-agents', name: 'Creative Agents', path: '/root/projects/creative-agents' }
         ];
 
         function launchAgent(projectId) {
@@ -1813,7 +1840,8 @@
             'analyseur-creatives': '🔍',
             'generateur-creas-sth': '🎨',
             'spy-affiliation-trading': '🕵️',
-            'todo-mindmap': '✅'
+            'todo-mindmap': '✅',
+            'creative-agents': '🎨'
         };
 
         async function fetchIAUsage() {
