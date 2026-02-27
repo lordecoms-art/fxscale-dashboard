@@ -54,7 +54,8 @@ function fallbackResponse(error) {
         'analyseur-creatives': 'Analyseur Creatives',
         'generateur-creas-sth': 'Générateur Créas STH',
         'spy-affiliation-trading': 'Spy Affiliation Trading',
-        'fxscale-mindmap': 'FXSCALE Mindmap'
+        'fxscale-mindmap': 'FXSCALE Mindmap',
+        'sth-growth-engine': 'STH Growth Engine'
     };
     const health = {};
     for (const [id, name] of Object.entries(projectNames)) {
@@ -81,7 +82,8 @@ function detectLocalSessions(res) {
         'analyseur-creatives': '/root/projects/analyseur-creatives',
         'generateur-creas-sth': '/root/projects/generateur-creas-sth',
         'spy-affiliation-trading': '/root/projects/spy-affiliation-trading',
-        'fxscale-mindmap': '/root/projects/fxscale-mindmap'
+        'fxscale-mindmap': '/root/projects/fxscale-mindmap',
+        'sth-growth-engine': '/root/projects/sth-growth-engine'
     };
 
     const projectNames = {
@@ -93,7 +95,8 @@ function detectLocalSessions(res) {
         'analyseur-creatives': 'Analyseur Creatives',
         'generateur-creas-sth': 'Générateur Créas STH',
         'spy-affiliation-trading': 'Spy Affiliation Trading',
-        'fxscale-mindmap': 'FXSCALE Mindmap'
+        'fxscale-mindmap': 'FXSCALE Mindmap',
+        'sth-growth-engine': 'STH Growth Engine'
     };
 
     exec('ps aux --no-headers | grep -E "claude" | grep -v grep', (err, stdout) => {
